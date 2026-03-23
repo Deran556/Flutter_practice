@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter_application/data/views/pages/home_page.dart';
+import 'package:flutter_application/data/views/pages/widget_tree.dart';
 import 'package:flutter_application/data/views/widgets/hero_widget.dart';
-TextEditingController controller = TextEditingController();
+
+TextEditingController controllerEmail = TextEditingController();
+TextEditingController controllerPassword = TextEditingController();
+String confirmedEmail = "123";
+String confirmedPassword = "123";
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -11,7 +17,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
-    controller.dispose();
+    controllerEmail.dispose();
+    controllerPassword.dispose();
     super.dispose();
   }
   @override
@@ -19,22 +26,57 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
            children: [
             HeroWidget(title: "Login"),
+            SizedBox(height: 20.0,),
             TextField(
                 controller:
-                    controller, //dont forget to add controller to textfield
-                decoration: InputDecoration(border: (OutlineInputBorder())),
+                    controllerEmail, //dont forget to add controller to textfield
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  border: (OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ))),
                 onEditingComplete: () => setState(
                   () {},
                 ), //using arrow function when you want execute only one, if you want to also print anything else - use normal function
               ),
+              SizedBox(height: 20.0,),
+            TextField(
+                controller:
+                    controllerPassword, //dont forget to add controller to textfield
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  border: (OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ))),
+                onEditingComplete: () => setState(
+                  () {},
+                ), //using arrow function when you want execute only one, if you want to also print anything else - use normal function
+              ),
+              SizedBox(height: 20.0,),
+              ElevatedButton(onPressed:() {
+                onLoginPressed();
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 45.0),
+              ),
+               child: Text("Login"))
 
            ],
         ),
       ),
     );
   }
-}
+  void onLoginPressed() {
+    if (confirmedEmail == controllerEmail.text && confirmedPassword == controllerPassword.text) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+              return WidgetTree();
+    },
+    ),
+    );
+    }
+  }
+  }
