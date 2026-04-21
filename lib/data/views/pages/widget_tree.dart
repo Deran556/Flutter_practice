@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/data/constants.dart';
 import 'package:flutter_application/data/notifiers.dart';
 import 'package:flutter_application/data/views/pages/home_page.dart';
 import 'package:flutter_application/data/views/pages/profile_page.dart';
 import 'package:flutter_application/data/views/pages/settings_page.dart';
 
 import 'package:flutter_application/data/views/widgets/navbar_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //Create a list containing all pages 
 List<Widget> pages = [
   HomePage(),
@@ -18,7 +20,13 @@ class WidgetTree extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(title: Text("Hello World"),
         actions: [
-          IconButton(onPressed: () {isDarkModeNotifier.value = !isDarkModeNotifier.value;}, 
+          IconButton(onPressed: () async { //await always go with async
+            isDarkModeNotifier.value = !isDarkModeNotifier.value;
+            // Obtain shared preferences.
+            final SharedPreferences prefs = await SharedPreferences.getInstance();
+            // Save an boolean value to 'repeat' key.
+            await prefs.setBool(Kconstants.themeModeKey, isDarkModeNotifier.value);
+            }, 
           icon: ValueListenableBuilder(valueListenable: isDarkModeNotifier, 
           builder: (context, isDarkMode, child) {
             return Icon(isDarkMode ? Icons.dark_mode : Icons.light_mode

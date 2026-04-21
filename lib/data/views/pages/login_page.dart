@@ -10,7 +10,7 @@ String confirmedPassword = "123";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key,
-  required this.title, //this title because we want to use it in the hero widget, and we want to pass it from the welcome page, so we need to make it required, and also add it to the constructor
+  required this.title, 
   });
   final String title;
   @override
@@ -81,10 +81,11 @@ class _LoginPageState extends State<LoginPage> {
   }
   void onLoginPressed() {
     if (confirmedEmail == controllerEmail.text && confirmedPassword == controllerPassword.text) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) { 
               return WidgetTree();
     },
     ),
+    (route) => false, //replace the push -> pushAndRemoveUntil, it will remove the previous page then when you loigned you cannot go back to the welcome page or login page (any page before).
     );
     }
   }
