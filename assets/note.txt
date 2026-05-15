@@ -25,3 +25,18 @@ pod install
 cd ..
 flutter run
 
+Bug 1: tại sao các container sau khi hiện đủ trên màn hình lại không thể sửa title theo Kvalue trong constant.dart? 
+Bước đã làm: 
+- check home_page.dart, tất cả giá trị mặc định đã được thay thế bởi giá trị Kvalue để thay đổi title và description.
+- check constant.dart, tất cả đều đã được viết đúng, giá trị được gán đúng.
+Nguyên  nhân: 
+- chưa check lại ContainerWidget, cái này được tạo ra bởi mình, nghĩa là lỗi cài đặt là do mình. 
+- container_widget.dart là file chứa ContainerWidget, trong đây có 2 giá trị cứng:
+     children: [
+                Text("Basic Layout", style: KTextStyle.titleTealText),
+                Text("This is the description", style: KTextStyle.descriptionTealText),
+              ],
+trong class ContainerWidget, trong function Container, Text bị đặt mặc định với 2 giá trị cho title từ trước. 
+=> không thể dùng giá trị bên Kvalue vì chưa khai báo và set cho Container trong ContainerWidget. 
+- Có set title và description nhưng không dùng :))))))))))
+

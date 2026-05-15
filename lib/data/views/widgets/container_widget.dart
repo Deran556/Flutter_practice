@@ -20,8 +20,8 @@ class ContainerWidget extends StatelessWidget {
             child: Padding(padding: EdgeInsets.all( 15.0),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Basic Layout", style: KTextStyle.titleTealText),
-                Text("This is the description", style: KTextStyle.descriptionTealText),
+                Text(title, style: KTextStyle.titleTealText),
+                Text(description, style: KTextStyle.descriptionTealText),
               ],
             ),
             ),
