@@ -10,7 +10,7 @@ class ProfilePage extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 30.0,
-          backgroundImage: AssetImage('assets/images/bg.jpeg'),
+          backgroundImage: AssetImage('assets/images/bg.jpeg'), //using AssetImage insteat of image.asset('path') to load the image in circleAvatar.
         ),
       ListTile(
         title: Text("Logout"),

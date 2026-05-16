@@ -27,55 +27,61 @@ class _LoginPageState extends State<LoginPage> {
   }
   @override
   Widget build(BuildContext context) {
+    MediaQuery.of(context).size; //to get the size of the screen, we can use it to make the page responsive in different screen sizes, but we will use layout builder instead because it's more efficient and it will only rebuild the widget that needs to be rebuilt when the screen size changes.
     return Scaffold(
       appBar: AppBar(),
       body: Center(
         child: SingleChildScrollView( //the keyboard appears without error because it's scrollable
           child: Padding(
             padding: const EdgeInsets.all(17.0),
-            child: Column(
-               children: [
-                Lottie.asset('assets/lotties/DotLoading.json', height: 150.0),
-                //HeroWidget(title: widget.title), //we want to use the title from the welcome page, so we need to pass it from the welcome page, and also add it to the constructor
-                //using statefull widget so use widget.title help refresh the page
-                SizedBox(height: 15.0,),
-                TextField(
-                    controller:
-                        controllerEmail, //dont forget to add controller to textfield
-                    decoration: InputDecoration(
-                      hintText: "Email",
-                      border: (OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ))),
-                    onEditingComplete: () => setState(
-                      () {},
-                    ), //using arrow function when you want execute only one, if you want to also print anything else - use normal function
-                  ),
-                  SizedBox(height: 20.0,),
-                TextField(
-                    controller:
-                        controllerPassword, //dont forget to add controller to textfield
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      border: (OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ))),
-                    onEditingComplete: () => setState(
-                      () {},
-                    ), //using arrow function when you want execute only one, if you want to also print anything else - use normal function
-                  ),
-                  SizedBox(height: 20.0,),
-                  FilledButton(onPressed:() {
-                    onLoginPressed();
-                  },
-                  style: FilledButton.styleFrom(
-                    minimumSize: Size(double.infinity, 45.0),
-                  ),
-                   child: Text(widget.title)),
-                   SizedBox(height: 25.0,),
-          
-               ],
-            ),
+            child: LayoutBuilder(builder:(context, BoxConstraints constraints) {
+              return FractionallySizedBox(
+              widthFactor: constraints.maxWidth > 500 ? 0.5 : 1.0, //30% of the screen width, it will be responsive in different screen sizes
+              child: Column(
+                 children: [
+                  Lottie.asset('assets/lotties/DotLoading.json', height: 150.0),
+                  //HeroWidget(title: widget.title), //we want to use the title from the welcome page, so we need to pass it from the welcome page, and also add it to the constructor
+                  //using statefull widget so use widget.title help refresh the page
+                  SizedBox(height: 15.0,),
+                  TextField(
+                      controller:
+                          controllerEmail, //dont forget to add controller to textfield
+                      decoration: InputDecoration(
+                        hintText: "Email",
+                        border: (OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ))),
+                      onEditingComplete: () => setState(
+                        () {},
+                      ), //using arrow function when you want execute only one, if you want to also print anything else - use normal function
+                    ),
+                    SizedBox(height: 20.0,),
+                  TextField(
+                      controller:
+                          controllerPassword, //dont forget to add controller to textfield
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        border: (OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ))),
+                      onEditingComplete: () => setState(
+                        () {},
+                      ), //using arrow function when you want execute only one, if you want to also print anything else - use normal function
+                    ),
+                    SizedBox(height: 20.0,),
+                    FilledButton(onPressed:() {
+                      onLoginPressed();
+                    },
+                    style: FilledButton.styleFrom(
+                      minimumSize: Size(double.infinity, 45.0),
+                    ),
+                     child: Text(widget.title)),
+                     SizedBox(height: 25.0,),
+                        
+                 ],
+              ),
+            );
+            },),
           ),
         ),
       ),

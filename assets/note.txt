@@ -40,7 +40,6 @@ trong class ContainerWidget, trong function Container, Text bị đặt mặc đ
 => không thể dùng giá trị bên Kvalue vì chưa khai báo và set cho Container trong ContainerWidget. 
 - Có set title và description nhưng không dùng :))))))))))
 
-
 assets folder
 - each time you create any folder or file in assets folder -> Check the yaml file and add the new folder path. 
 - there are image folder and loties folder inside 
@@ -48,4 +47,9 @@ assets folder
 assets:
     - assets/images/ 
     - assets/lotties/
+
+CÁCH NHỚ: 
+- nếu khó nhờ các child, children, body -> phân loại: pading, childScrollView, SizedBox đều là area
+- tạo area để chứa content, nội dung trong Text, return,...
+
 
