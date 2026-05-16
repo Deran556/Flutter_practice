@@ -20,8 +20,10 @@ class HomePage extends StatelessWidget {
     child: SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(height: 10.0,),
           HeroWidget(title: "Home", 
           nextPage: CoursePage(),), //Title in the video is "Flutter Mapp"
+          SizedBox(height: 10.0,),
           ...List.generate(list.length, (index) { //... telling flutter I want to add many widgets inside
             return ContainerWidget(title: list.elementAt(index), description: "This is a description");
           })
