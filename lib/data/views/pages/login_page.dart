@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   }
   @override
   Widget build(BuildContext context) {
-    MediaQuery.of(context).size; //to get the size of the screen, we can use it to make the page responsive in different screen sizes, but we will use layout builder instead because it's more efficient and it will only rebuild the widget that needs to be rebuilt when the screen size changes.
+    double widthScreen = MediaQuery.of(context).size.width; //to get the size of the screen, we can use it to make the page responsive in different screen sizes, but we will use layout builder instead because it's more efficient and it will only rebuild the widget that needs to be rebuilt when the screen size changes.
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -36,9 +36,9 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.all(17.0),
             child: LayoutBuilder(builder:(context, BoxConstraints constraints) {
               return FractionallySizedBox(
-              widthFactor: constraints.maxWidth > 500 ? 0.5 : 1.0, //30% of the screen width, it will be responsive in different screen sizes
+              widthFactor: widthScreen > 500 ? 0.5 : 1.0, //30% of the screen width, it will be responsive in different screen sizes
               child: Column(
-                 children: [
+                 children: [ 
                   Lottie.asset('assets/lotties/DotLoading.json', height: 150.0),
                   //HeroWidget(title: widget.title), //we want to use the title from the welcome page, so we need to pass it from the welcome page, and also add it to the constructor
                   //using statefull widget so use widget.title help refresh the page
